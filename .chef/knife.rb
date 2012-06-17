@@ -9,7 +9,7 @@ validation_key           "#{ENV['HOME']}/.chef/#{ENV['ORGNAME']}-validator.pem"
 chef_server_url          "https://api.opscode.com/organizations/#{ENV['ORGNAME']}"
 cache_type               'BasicFile'
 cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
-cookbook_path            ["#{current_dir}/../cookbooks"]
+cookbook_path            ["#{ENV['HOME']}/chef-repo/cookbooks"]
 knife[:aws_access_key_id]=	ENV['AWS_ACCESS_KEY_ID']
 knife[:aws_secret_access_key]=	ENV['AWS_SECRET_ACCESS_KEY']
 knife[:region]=			"us-east-1"

@@ -7,6 +7,14 @@
 # All rights reserved - Do Not Redistribute
 #
 
+package "libmysqlclient18" do
+  action :install
+end
+
+chef_gem "mysql" do
+  action :install
+end
+
 include_recipe "database"
 
 mysql_database 'create prod' do

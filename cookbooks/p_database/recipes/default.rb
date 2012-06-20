@@ -7,7 +7,15 @@
 # All rights reserved - Do Not Redistribute
 #
 
-package "libmysqlclient18" do
+package "build-essential" do
+  action :install
+end
+
+package "libmysqlclient-dev" do
+  action :install
+end
+
+chef_gem "right_aws" do
   action :install
 end
 

@@ -17,7 +17,3 @@ Feature: Automatically deploy a database server
   Scenario: mysqld is running
     When I run "ps aux | grep mysqld | grep -v grep"
       Then I should see "mysqld" in the output
-
-  Scenario: data volume should be an mdadm raid device
-    When I run "mount | grep /mnt/data"
-      Then I should see "/dev/md" in the output

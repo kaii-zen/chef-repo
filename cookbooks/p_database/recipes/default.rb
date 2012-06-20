@@ -9,7 +9,6 @@
 
 include_recipe "database"
 
-te a mysql database
 mysql_database 'create prod' do
   connection ({:host => "localhost", :username => 'root', :password => node['mysql']['server_root_password']})
   database_name 'prod'

@@ -8,7 +8,7 @@
 #
 
 # We need those available before we attempt to install the mysql gem
-%w(build-essential libmysqlclient-dev).each do |pkg|
+%w(build-essential libmysqlclient-dev mdadm).each do |pkg|
   p = package pkg do
     action :nothing
   end
@@ -30,7 +30,7 @@ aws_ebs_volume "data0" do
   aws_secret_access_key aws['aws_secret_access_key']
   size 10
   device '/dev/sdf'
-  action [ :create, :attach ]
+  action [ :create, :attach, :detach, :attach ]
 end
 
 aws_ebs_volume "data1" do
@@ -38,7 +38,7 @@ aws_ebs_volume "data1" do
   aws_secret_access_key aws['aws_secret_access_key']
   size 10
   device '/dev/sdg'
-  action [ :create, :attach ]
+  action [ :create, :attach, :detach, :attach ]
 end
 
 aws_ebs_volume "data2" do
@@ -46,7 +46,15 @@ aws_ebs_volume "data2" do
   aws_secret_access_key aws['aws_secret_access_key']
   size 10
   device '/dev/sdh'
-  action [ :create, :attach ]
+  action [ :create, :attach, :detach, :attach ]
+end
+
+
+mdadm "/dev/md0" do
+  devices [ "/dev/xvdf", "/dev/xvdg", "/dev/xvdh" ]
+  level 5
+  chunk 64
+  action [ :create, :assemble ]
 end
 
 mysql_database 'create prod' do
